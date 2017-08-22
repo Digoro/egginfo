@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var Sequelize = require('sequelize');
-const sequelize = new Sequelize('mysql://admin:1234@127.0.0.1/egginfo', {autoIncrement: true});
+var config = require('../config')
+const sequelize = new Sequelize(config.url, {autoIncrement: true});
 var EggInfo = sequelize.define('egginfo', {
     id: {
         type: Sequelize.INTEGER,
