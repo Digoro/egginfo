@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Sequelize = require('sequelize');
-var config = require('../config')
-const sequelize = new Sequelize(config.url, {autoIncrement: true});
+const sequelize = new Sequelize(process.env['CLEARDB_DATABASE_URL'], {autoIncrement: true});
 var EggInfo = sequelize.define('egginfo', {
     id: {
         type: Sequelize.INTEGER,

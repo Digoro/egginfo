@@ -42,5 +42,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 5050;
 app.listen(port);
