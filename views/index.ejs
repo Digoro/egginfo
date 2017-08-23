@@ -1,10 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="eggInfoApp">
 <head>
     <meta charset="UTF-8">
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGcULOIoWgRqbW8Zz55GUNwJUmXiSONFY"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/async/2.5.0/async.min.js"></script>
+    <script src="js/eggInfo.js"></script>
+    <link rel='stylesheet' href='css/style.css'/>
+
 </head>
 <body>
-    <%= egginfo %>
+    <div class="container" ng-controller="eggInfoCtrl">
+        <div class="row">
+            <div class="col-md-12">
+                <div ng-repeat="eggInfo in eggInfoList">
+                    {{eggInfo}}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
