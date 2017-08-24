@@ -5,7 +5,6 @@ var EggInfo = require('../db');
 var googleMapKey = require('../config').googleMapKey;
 var googleMapClient = require('@google/maps').createClient(googleMapKey);
 var dbUrl = process.env['DATABASE_URL'];
-if (!dbUrl) dbUrl = require('../config').dbUrl.url;
 var cheerio = require('cheerio');
 var iconv = require('iconv-lite');
 var cheerioTableParser = require('cheerio-tableparser');
