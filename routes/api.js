@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var async = require('async');
 var EggInfo = require('../db');
-var googleMapKey = require('../config').googleMapKey;
+var googleMapKey = process.env['googleMapKey'];
 var googleMapClient = require('@google/maps').createClient(googleMapKey);
 var dbUrl = process.env['DATABASE_URL'];
 var cheerio = require('cheerio');
@@ -26,7 +26,7 @@ function decoder(html) {
     return converted;
 }
 
-var site = require('../config').eggInfoSite.site;
+var site = process.env['eggInfoSite'];
 function updateEggInfo() {
     request({url: site, encoding: null}, function (error, response, html) {
         if (error) throw error;
