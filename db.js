@@ -1,4 +1,4 @@
-var dbUrl = process.env['CLEARDB_DATABASE_URL'];
+var dbUrl = process.env['DATABASE_URL'];
 if (!dbUrl) dbUrl = require('./config').dbUrl.url;
 var Sequelize = require('sequelize');
 const sequelize = new Sequelize(dbUrl, {autoIncrement: true});

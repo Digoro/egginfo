@@ -1,9 +1,13 @@
 var dbUrl = {
-    url: 'YOUR DB URL'
+    url: ''
 };
 
 var googleMapKey = {
-    key: 'YOUR KEY'
+    key: ''
 };
 
-module.exports = {dbUrl, googleMapKey};
+var eggInfoSite = {
+    site: ''
+};
+
+module.exports = {dbUrl, googleMapKey, eggInfoSite};
