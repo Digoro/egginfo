@@ -1,5 +1,9 @@
-var dbconfig = {
+var dbUrl = {
     url: 'YOUR DB URL'
 };
 
-module.exports = dbconfig;
+var googleMapKey = {
+    key: 'YOUR KEY'
+};
+
+module.exports = {dbUrl, googleMapKey};

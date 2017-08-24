@@ -1,13 +1,18 @@
 var app = angular.module('eggInfoApp', []);
 app.controller('eggInfoCtrl', function ($scope, $http) {
-    $http.get('/api/geocode').then(function (res) {
+    $http.get('/api/eggInfoList').then(function (res) {
+        res.data.map(function (v) {
+            v.code = v.code.split(',');
+            return v
+        });
+        $scope.eggs = res.data;
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 8,
+            zoom: 7,
             center: new google.maps.LatLng(36.445314, 127.897339),
             mapTypeId: google.maps.MapTypeId.ROEADMAP
         });
         res.data.forEach(function (v) {
-            let location = [v.query.address, v.json.results[0].geometry.location.lat, v.json.results[0].geometry.location.lng];
+            let location = [v.address, JSON.parse(v.location).lat, JSON.parse(v.location).lng];
             var marker = new google.maps.Marker({
                 position: new google.maps.LatLng(location[1], location[2]),
                 map: map
@@ -19,8 +24,26 @@ app.controller('eggInfoCtrl', function ($scope, $http) {
                 infoWindow.open(map, marker);
                 setTimeout(function () {
                     marker.hideInfoWindow();
-                },3000)
+                }, 3000)
             })
         });
     })
+    $scope.showDetail = function (egg) {
+        $('#detailModal').modal('show');
+        $scope.eggInfo = egg;
+        console.log(egg)
+    };
+});
+app.filter('setImg', function () {
+    return function (item, index) {
+        let number = index % 10;
+        return `egg${number}.png`;
+    }
+});
+$( document ).ready(function() {
+    $('.trigger').on('click', function() {
+        $('.modal-wrapper').toggleClass('open');
+        $('.page-wrapper').toggleClass('blur-it');
+        return false;
+    });
 });

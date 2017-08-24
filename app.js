@@ -37,7 +37,6 @@ app.use(function (err, req, res, next) {
 
 var port = process.env.PORT || 5050;
 
-// setInterval(updateEggInfo, 1000 * 60);
 app.listen(port, function () {
     console.log('EggInfo app listening port ' + port);
 });

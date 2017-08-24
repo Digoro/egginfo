@@ -2,31 +2,104 @@
 <html ng-app="eggInfoApp">
 <head>
     <meta charset="UTF-8">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGcULOIoWgRqbW8Zz55GUNwJUmXiSONFY"></script>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/async/2.5.0/async.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGcULOIoWgRqbW8Zz55GUNwJUmXiSONFY"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="js/eggInfo.js"></script>
+    <link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css">
     <link rel='stylesheet' href='css/style.css'/>
-
 </head>
 <body>
-    <div class="container" ng-controller="eggInfoCtrl">
+<div ng-controller="eggInfoCtrl" style="height:100%">
+    <div id="map"></div>
+    <div id="search" class="container">
         <div class="row">
-            <div class="col-md-12">
-                <div ng-repeat="eggInfo in eggInfoList">
-                    {{eggInfo}}
+            <div class="col-sm-offset-4 col-sm-4 text-center"><h3 style="color:#274555;"><strong>EGG INFO</strong></h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-offset-2 col-sm-8">
+                <input type="text" class="form-control" placeholder="쓰레기 계란 정보를 입력해주세요." ng-model="searchKey">
+                <div ng-repeat="egg in filteredEggs = (eggs | filter:searchKey)">
+                    <div class="card" ng-click="showDetail(egg)">
+                        <div class="card-block">
+                            <div class="row">
+                                <div class="col-sm-2"><img src="img/{{egg | setImg: $index}}">
+                                </div>
+                                <div class="col-sm-7">
+                                    <h4 class="card-title">난각코드: {{egg.code.join(',')}}</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted"><span style="color:red">{{egg.pesticide_name}} 검출</span>
+                                    </h6>
+                                    <p class="card-text">{{egg.address}}</p>
+                                </div>
+                                <div class="col-sm-3"><p class="card-text"><small>시료채취일&nbsp;</small><code>{{egg.grabbed_sample_date}}</code></p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" ng-if="!filteredEggs.length">
+                    <p class="card-title">검색 결과가 없습니다.</p>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div id="map"></div>
+    </div>
+
+    <div class="modal fade" id="detailModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title"><span style="font-size:12px;">난각코드</span>  <strong>{{eggInfo.code.join(',')}}</strong></h3>
+                    <table class="table" id="eggInfoTable">
+                        <tr>
+                            <th>농가명</th>
+                            <td>{{eggInfo.farm}}</td>
+                        </tr>
+                        <tr>
+                            <th>주소</th>
+                            <td>{{eggInfo.address}}</td>
+                        </tr>
+                        <tr>
+                            <th>사육규모</th>
+                            <td>{{eggInfo.breeding_size}}</td>
+                        </tr>
+                        <tr>
+                            <th>생산량</th>
+                            <td>{{eggInfo.product_amount}}</td>
+                        </tr>
+                        <tr>
+                            <th>인증사항</th>
+                            <td>{{eggInfo.certification}}</td>
+                        </tr>
+                        <tr>
+                            <th>시료 채취일</th>
+                            <td>{{eggInfo.grabbed_sample_date}}</td>
+                        </tr>
+                        <tr>
+                            <th>검출농약</th>
+                            <td>{{eggInfo.pesticide_name}}</td>
+                        </tr>
+                        <tr>
+                            <th>검출량(mg/kg)</th>
+                            <td>{{eggInfo.pesticide_amount}}</td>
+                        </tr>
+                        <tr>
+                            <th>기준</th>
+                            <td>{{eggInfo.standard}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn" data-dismiss="modal">확인</button>
+                </div>
             </div>
         </div>
     </div>
+
+</div>
 </body>
 </html>

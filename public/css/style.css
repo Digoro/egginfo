@@ -1,5 +1,40 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    background-color: #ffffff;
+    font-family: 'Nanum Gothic Coding';
+}
+
 #map {
-  width: 900px;
-  height: 900px;
-  background-color: grey;
+    height: 50%;
+    width: auto;
+}
+
+#search {
+    height: 50%;
+    width: auto;
+}
+
+#eggInfoTable {
+    margin-bottom: 0px;
+}
+
+#eggInfoTable tr:hover {
+    background-color: #F2784B;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    width: 100%;
+    padding: 15px 10px 15px 10px;
+    margin-top: 7px;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    background-color: aliceblue;
 }
