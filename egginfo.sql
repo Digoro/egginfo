@@ -12,6 +12,6 @@ CREATE TABLE egginfo.egginfo (
   standard VARCHAR(255) NULL,
   product_amount VARCHAR(255) NULL,
   breeding_size VARCHAR(255) NULL,
-  location VARCHAR(45) NULL,
-  PRIMARY KEY id
+  location VARCHAR(255) NULL,
+  PRIMARY KEY (id)
   );
