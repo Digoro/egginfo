@@ -1,4 +1,7 @@
 var app = angular.module('eggInfoApp', []);
+app.config(['$qProvider', function ($qProvider) {
+    $qProvider.errorOnUnhandledRejections(false);
+}]);
 app.controller('eggInfoCtrl', function ($scope, $http) {
     $http.get('/api/eggInfoList').then(function (res) {
         res.data.map(function (v) {
