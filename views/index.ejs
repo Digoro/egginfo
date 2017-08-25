@@ -23,8 +23,15 @@
         </div>
         <div class="row">
             <div class="col-sm-offset-2 col-sm-8">
-                <input type="text" class="form-control" placeholder="쓰레기 계란 정보를 입력해주세요." ng-model="searchKey" ng-change="search(searchKey)" kr-input>
-                <code>클릭하시면 상세정보를 확인할 수 있습니다</code>
+                <div class="row">
+                    <div class="col-xs-10" style="padding-right: 0px;">
+                        <input type="text" class="form-control" placeholder="쓰레기 계란 정보를 입력해주세요." ng-model="searchKey" ng-change="search(searchKey)" kr-input>
+                    </div>
+                    <div class="col-xs-2" style="padding-left: 9px;">
+                        <button class="btn btn-xs" type="submit" ng-click="search(searchKey)">검색</button>
+                    </div>
+                </div>
+                <code>클릭하시면 상세정보를 확인할 수 있습니다</code><small class="pull-right">총{{filteredEggs.length}}개</small>
                 <div ng-repeat="egg in filteredEggs = (eggs | filter:searchKey)">
                     <div class="card" ng-click="showDetail(egg)">
                         <div class="card-block">
