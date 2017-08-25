@@ -27,7 +27,7 @@ function decoder(html) {
 }
 
 var site = process.env['eggInfoSite'];
-function updateEggInfo() {
+router.get('/updateEggInfo', function (req, res, next) {
     request({url: site, encoding: null}, function (error, response, html) {
         if (error) throw error;
         let eggInfo = JSON.parse(decoder(html));
@@ -49,16 +49,14 @@ function updateEggInfo() {
                             product_amount: v.product_amt,
                             breeding_size: v.sayuk_size,
                             location: JSON.stringify(data.json.results[0].geometry.location)
-                        })
+                        });
+                        res.status(200);
+                        res.send('ok');
                     });
                 });
             })
         });
     });
-};
-
-router.get('/updateEggInfo', function (req, res, next) {
-    updateEggInfo()
 });
 
 module.exports = router;
