@@ -59,3 +59,12 @@ tag
     padding:.1em .6em;
     text-shadow:0 1px 0 #fff;
 }
+
+.copyleftlogo {
+    display:inline-block;
+    transform: rotate(180deg);
+}
+
+#copyleft {
+    font-size: 1px;
+}
